@@ -30,13 +30,10 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
-
-
-
-
-
+weights = sigmoid((all_theta * X')');
+[~, idx] = max(weights, [], 2);
+p = idx;
 
 % =========================================================================
-
 
 end
