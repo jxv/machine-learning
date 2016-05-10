@@ -62,11 +62,12 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% activation units
 a1 = [ones(m, 1) X];
 a1 = [ones(m, 1) X];
 a2 = [ones(m, 1) sigmoid(a1 * Theta1')];
 sig = sigmoid(a2 * Theta2');
-yVector = repmat([1 : num_labels], m, 1) == repmat(y, 1, num_labels);
+yVec = repmat([1 : num_labels], m, 1) == repmat(y, 1, num_labels);
 cost = -yVector .* log(sig) - (1 - yVector) .* log(1 - sig);
 
 Theta1NoBias = Theta1(:, 2 : end);
@@ -84,8 +85,7 @@ for t = 1:m,
   a1t = a1(t, :)';
   a2t = a2(t, :)';
   sigt = sig(t, :)';
-  yVectorT = yVector(t, :)';
-  d3t = sigt - yVectorT;
+  d3t = sigt - yVec(t, :)';
   z2t = [ 1; Theta1 * a1t ];
   d2t = Theta2' * d3t .* sigmoidGradient(z2t);
   delta1 = delta1 + d2t(2 : end) * a1t';
